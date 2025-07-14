@@ -14,6 +14,6 @@ public class GetUserProfileUseCase {
     }
     
     public Optional<UserProfile> execute(Integer userId) {
-        return userProfileRepository.findByUserId(userId);
+        return userProfileRepository.findById(userId);
     }
 }

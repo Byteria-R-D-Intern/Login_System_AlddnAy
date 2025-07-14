@@ -5,7 +5,10 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "user_profile")
+@Table(
+    name = "user_profile",
+    uniqueConstraints = @UniqueConstraint(columnNames = "user_id")
+)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,13 +18,12 @@ public class UserProfile {
     private Integer id;
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false) // kullanici_id → user_id
-    private User user; // kullanici → user
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    private String address; // adres → address
-    private String phone; // tel → phone
+    private String address;
+    private String phone;
 
-    @Column(name = "birth_date") // dogum_gunu → birth_date
-    private LocalDate birthDate; // dogumGunu → birthDate
-
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
 }
