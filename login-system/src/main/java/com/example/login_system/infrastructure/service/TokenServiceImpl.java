@@ -58,6 +58,17 @@ public class TokenServiceImpl implements TokenService {
             throw new RuntimeException("Invalid token");
         }
     }
+
+    @Override
+    public String extractUserRoleFromToken (String token){
+        Claims claims = Jwts.parserBuilder()
+        .setSigningKey(key)
+        .build()
+        .parseClaimsJws(token)
+        .getBody();
+    return claims.get("role", String.class);
+
+    }
     @Override
     public boolean isTokenExpired(String token) {
         try {
