@@ -7,6 +7,7 @@ import com.example.login_system.application.service.TokenService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import com.example.login_system.domain.model.Role;
 
 @Service
 public class UserUseCase {
@@ -21,7 +22,7 @@ public class UserUseCase {
     }
 
     // Register
-    public Optional<String> register(String email, String password) {
+    public Optional<String> register(String email, String password, String roleStr) {
         if (userRepository.existsByEmail(email)) {
             return Optional.empty();
         }
@@ -29,7 +30,15 @@ public class UserUseCase {
         User user = new User();
         user.setEmail(email);
         user.setPassword(hashedPassword);
-        user.setRole(com.example.login_system.domain.model.Role.USER);
+
+        Role role;
+        try {
+            role = Role.valueOf(roleStr.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return Optional.empty(); // Geçersiz rol
+        }
+        user.setRole(role);
+
         userRepository.save(user);
         String token = tokenService.createToken(String.valueOf(user.getId()), user.getRole().toString());
         return Optional.of(token);

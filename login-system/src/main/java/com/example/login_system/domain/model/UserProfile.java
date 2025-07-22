@@ -11,7 +11,6 @@ import java.time.LocalDate;
 )
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +25,11 @@ public class UserProfile {
 
     @Column(name = "birth_date")
     private LocalDate birthDate;
+
+    public UserProfile(User user, String address, String phone, LocalDate birthDate) {
+        this.user = user;
+        this.address = address;
+        this.phone = phone;
+        this.birthDate = birthDate;
+    }
 }

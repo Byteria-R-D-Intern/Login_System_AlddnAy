@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.login_system.LoginSystemApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.799 s -- in com.example.login_system.LoginSystemApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.94 s -- in com.example.login_system.LoginSystemApplicationTests

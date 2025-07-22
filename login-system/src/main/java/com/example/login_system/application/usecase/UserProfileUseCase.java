@@ -28,19 +28,19 @@ public class UserProfileUseCase {
         if (user == null) {
             return Optional.empty();
         }
-        UserProfile profile = new UserProfile(userId, user, address, phone, birthDate);
+        UserProfile profile = new UserProfile(user, address, phone, birthDate);
         userProfileRepository.save(profile);
         return Optional.of(profile);
     }
 
     // READ
     public Optional<UserProfile> get(Integer userId) {
-        return userProfileRepository.findById(userId);
+        return userProfileRepository.findByUserId(userId);
     }
 
     // UPDATE
     public Optional<UserProfile> update(Integer userId, String address, String phone, LocalDate birthDate) {
-        Optional<UserProfile> userProfileOpt = userProfileRepository.findById(userId);
+        Optional<UserProfile> userProfileOpt = userProfileRepository.findByUserId(userId);
         if (userProfileOpt.isEmpty()) {
             return Optional.empty();
         }
@@ -54,7 +54,7 @@ public class UserProfileUseCase {
 
     // DELETE
     public boolean delete(Integer userId) {
-        Optional<UserProfile> userProfileOpt = userProfileRepository.findById(userId);
+        Optional<UserProfile> userProfileOpt = userProfileRepository.findByUserId(userId);
         if (userProfileOpt.isEmpty()) {
             return false;
         }
